@@ -1,0 +1,69 @@
+﻿<Window
+    x:Class="PlanConverter.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PlanConverter"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="525"
+    Height="350"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="3" />
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="3" />
+            </Style>
+            <Style TargetType="ListBox">
+                <Setter Property="Margin" Value="3" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <TabControl>
+        <TabItem Header="MPP to MPX">
+            <Grid Margin="5">
+                <Grid.DataContext>
+                    <local:MppToMpxConverter />
+                </Grid.DataContext>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button
+                    Grid.Row="0"
+                    Click="OpenForMpx"
+                    Content="Выберите mpp-файлы" />
+                <ListBox Grid.Row="1" ItemsSource="{Binding Path=ConvertFiles}" />
+                <Button
+                    Grid.Row="2"
+                    Command="{Binding Path=Convert}"
+                    Content="Конвертировать" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="MPP to MSPDI">
+            <Grid Margin="5">
+                <Grid.DataContext>
+                    <local:MppToMspdiConverter />
+                </Grid.DataContext>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button
+                    Grid.Row="0"
+                    Click="OpenForXml"
+                    Content="Выберите mpp-файлы" />
+                <ListBox Grid.Row="1" ItemsSource="{Binding Path=ConvertFiles}" />
+                <Button
+                    Grid.Row="2"
+                    Command="{Binding Path=Convert}"
+                    Content="Конвертировать" />
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
